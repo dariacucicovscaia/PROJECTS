@@ -1,1 +1,1 @@
-# mini-social-j2
+# mini-social-GUI
