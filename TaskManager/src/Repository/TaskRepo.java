@@ -8,19 +8,19 @@ import domain.Task;
 
 public class TaskRepo {
 
-	TaskFileAccess<Task> task = new TaskFileAccess<Task>();
+	TaskFileAccess task = new TaskFileAccess(new Task());
 	List<Task> usersTasks = new ArrayList<>();
-	Task usertask;
+	
 
 	// 3 -- add a task to the user (insert username, Task Title, Description)
 	public void addTasks(String username, String taskTitle, String taskDescription) {
-		usertask = new Task(username, taskTitle, taskDescription);
+		Task usertask = new Task(username, taskTitle, taskDescription);
 		usersTasks.add(usertask);
-		
+		task.serialize(usersTasks);
 	}
 
 	// 4 --show user's tasks (print: Task title, Description)
-	public Task showTasks(String username) {
-		return (Task) task.deserialize(usersTasks);
+	public List<Task> showTasks(String username) {
+		return task.deserialize(usersTasks);
 	}
 }

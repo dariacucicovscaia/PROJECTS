@@ -1,30 +1,27 @@
 package Storage;
 
 import java.io.FileInputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-public class FileAccessAbstractObj<Object> implements FilesSerializeInterface<Object> {
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
-	String filename;
+public abstract class FileAccessAbstractObj<T> implements FilesSerializeInterface<T> {
+
+	private Class<T> className;
+
+	public FileAccessAbstractObj(T obj) {
+		ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
+		this.className = (Class<T>) type.getActualTypeArguments()[0];
+	}
+
 	@Override
-	public void serialize(List<Object> object) {
+	public void serialize(List<T> object) {
 		try {
-			
-			 System.out.println(object.getClass().toGenericString());
-			 
-			 
-			filename = object.getClass().getSimpleName() + "";
-			
-			
-			FileOutputStream file = new FileOutputStream(filename);
+
+			FileOutputStream file = new FileOutputStream(className.getSimpleName());
 			ObjectOutputStream out = new ObjectOutputStream(file);
 
 			// Method for serialization of object
@@ -45,13 +42,12 @@ public class FileAccessAbstractObj<Object> implements FilesSerializeInterface<Ob
 	}
 
 	@Override
-	public Object deserialize(Object object) {
+	public List<T> deserialize(List<T> object) {
 		try {
-			filename = object.getClass().getSimpleName() + "";
-			FileInputStream file = new FileInputStream(filename);
+			FileInputStream file = new FileInputStream(className.getSimpleName());
 			ObjectInputStream in = new ObjectInputStream(file);
 
-			object = (Object) in.readObject();
+			object = (List<T>) in.readObject();
 
 			in.close();
 			file.close();
@@ -68,6 +64,7 @@ public class FileAccessAbstractObj<Object> implements FilesSerializeInterface<Ob
 			System.out.println("ClassNotFoundException" + " is caught");
 		}
 		return object;
+
 	}
 
 }

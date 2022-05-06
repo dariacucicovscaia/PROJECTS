@@ -6,34 +6,36 @@ import java.util.List;
 import Storage.UserFileAccess;
 import domain.User;
 
-public class UserRepo  {
+public class UserRepo {
 	
-	UserFileAccess<User> user = new UserFileAccess<User>();
+	
+	UserFileAccess user  = new UserFileAccess(new User());
 	TaskRepo tasks = new TaskRepo();
 	List<User> users = new ArrayList<User>();
-	User u;
+
 	
 	
 	//1 --create new users (insert: FirstName, LastName, userName)
 		public void createUser( String firstName, String lastName, String userName) {
-			u = new User(firstName, lastName, userName);
+			User u = new User(firstName, lastName, userName);
 			users.add(u);
-			user.serialize(users);;
+			user.serialize(users);
 			
 		}
-	    public User getUser() {
-	    	return (User) user.deserialize(u);
+	    public List<User> getUsers() {
+	    	return (List<User>) user.deserialize(users);
 	    }
 
 
 	 // 2 --show all users (prin: FirstName, LastName, number of tasks)
-	 	public List<String> showAllUsers() {	
-	 		User userr = ((User) user.deserialize(u));
+	 	public List<String> showAllUsers() {
 	 		List<String> show = new ArrayList<String>();
 	 	//needs a loop
-	 			show.add("FIRSTNAME:" + userr.getFirstName() + ", LASTNAME:" 
-	 		+ userr.getLastName() + ", TASKS:") ;		//add method to calculate the tasks				
-	 		
+	 	for (User U : getUsers()) {
+			show.add("FIRSTNAME:" + U.getFirstName() + ", LASTNAME:" 
+	 		+ U.getLastName() + ", TASKS:") ;		//add method to calculate the tasks		
+		}
+	 					
 	 		return show; 
 	 	}
 }
