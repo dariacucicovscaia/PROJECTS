@@ -35,7 +35,7 @@ public class myaplication {
 							// check if user name already exists
 							// add the user
 
-							userf.createUser(firstName, lastName, userName); // ------add this to a file or database
+							userrepo.addAndSerializeUser(firstName, lastName, userName); // ------add this to a file or database
 							
 
 						}
