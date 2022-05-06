@@ -52,7 +52,7 @@ public abstract class FileAccessAbstractObj<T> implements FilesSerializeInterfac
 			in.close();
 			file.close();
 
-			System.out.println("Object has been deserialized\n");
+			//System.out.println("Object has been deserialized\n");
 
 		}
 

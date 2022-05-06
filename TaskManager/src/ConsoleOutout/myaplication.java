@@ -5,20 +5,19 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Factory.UserFactory;
 import Repository.TaskRepo;
 import Repository.UserRepo;
 
 public class myaplication {
 	public static void main(String args[]) throws IOException, ClassNotFoundException {
-		
 
+		UserFactory userf = new UserFactory();
 		UserRepo userrepo = new UserRepo();
 		TaskRepo taskrepo = new TaskRepo();
-		
 
 		try (Scanner scanner = new Scanner(System.in)) {
 			String methodname = scanner.next();
-
 			String firstName = null, lastName = null, userName = null, taskTitle = null, taskDescription = null;
 
 			// -createUser -fn='FirstName' -ln='LastName' -un='UserName'
@@ -35,21 +34,21 @@ public class myaplication {
 							userName = ExtractXName(un);// ----------------------userName
 							// check if user name already exists
 							// add the user
-				       
-						userrepo.createUser(firstName, lastName, userName);   // ------add this to a file  or database
-					                				
-                       
+
+							userf.createUser(firstName, lastName, userName); // ------add this to a file or database
+							
+
 						}
 					}
 				}
-			} 
+			}
 			// -showAllUsers
 			if (methodname.equals("-showAllUsers")) {
-				
-					System.out.println(userrepo.showAllUsers());
-					
-			
-				
+
+				for (String one : userrepo.showAllUsers()) {
+					System.out.println(one);
+				}
+
 			}
 
 			// -addTask -un='userName' -tt='TaskTitle' -td='TaskDescription'
@@ -67,7 +66,7 @@ public class myaplication {
 							taskDescription = ExtractXName(td);// ---------------------taskDecription
 							// check if user name already exists
 							// add the user
-							
+
 							taskrepo.addTasks(userName, taskTitle, taskDescription);
 
 						}
@@ -78,11 +77,11 @@ public class myaplication {
 			// -showTasks -un='userName'
 			if (methodname.equals("-showTasks")) {
 				String un = scanner.next();
-				if(un.contains("'")){
-				//	System.out.println(ExtractXName(un));
+				if (un.contains("'")) {
+					// System.out.println(ExtractXName(un));
 					System.out.println();
 					System.out.println(taskrepo.showTasks(ExtractXName(un)));
-					
+
 				}
 			}
 
@@ -105,4 +104,3 @@ public class myaplication {
 	}
 
 }
-
