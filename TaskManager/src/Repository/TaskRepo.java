@@ -1,14 +1,17 @@
 package Repository;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
-import Storage.TaskFileAccess;
+import Storage.FileStorage;
 import domain.Task;
 
-public class TaskRepo {
+public class TaskRepo extends FileStorage<Task> {
 
-	TaskFileAccess task = new TaskFileAccess(new Task());
+	public TaskRepo(Task obj) {
+		super(obj);
+	}
 	List<Task> usersTasks = new ArrayList<>();
 	
 
@@ -16,11 +19,12 @@ public class TaskRepo {
 	public void addTasks(String username, String taskTitle, String taskDescription) {
 		Task usertask = new Task(username, taskTitle, taskDescription);
 		usersTasks.add(usertask);
-		task.serialize(usersTasks);
+		
+		serialize(usersTasks);
 	}
 
 	// 4 --show user's tasks (print: Task title, Description)
 	public List<Task> showTasks(String username) {
-		return task.deserialize(usersTasks);
+		return deserialize(usersTasks);
 	}
 }

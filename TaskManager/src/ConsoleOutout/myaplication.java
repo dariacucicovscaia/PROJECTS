@@ -13,8 +13,8 @@ public class myaplication {
 	public static void main(String args[]) throws IOException, ClassNotFoundException {
 
 		UserFactory userf = new UserFactory();
-		UserRepo userrepo = new UserRepo();
-		TaskRepo taskrepo = new TaskRepo();
+		UserRepo userrepo = null ;
+		TaskRepo taskrepo = null;
 
 		try (Scanner scanner = new Scanner(System.in)) {
 			String methodname = scanner.next();

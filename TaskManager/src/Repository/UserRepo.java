@@ -4,21 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Factory.UserFactory;
-import Storage.UserFileAccess;
+import Storage.FileStorage;
 import domain.User;
 
-public class UserRepo {
+public class UserRepo extends FileStorage<User>{
 
 	
-	TaskRepo tasks = new TaskRepo();
+	public UserRepo(User obj) {
+		super(obj);
+	}
+
+
+
 	UserFactory userFactory = new UserFactory();
-	UserFileAccess user = new UserFileAccess(new User());
 	List<User> users = new ArrayList<User>();
 	
 	
 	public void addAndSerializeUser(String firstName, String lastName, String userName) {
 		users.add(userFactory.createUser(firstName, lastName, userName));
-		user.serialize(users);
+		serialize(users);
 	}
 	
 	
@@ -28,7 +32,7 @@ public class UserRepo {
 		
 		List<String> show = new ArrayList<String>();
 
-		for (User u : user.deserialize(users)) {
+		for (User u : deserialize(users)) {
 			show.add("FIRSTNAME:" + u.getFirstName() + ", LASTNAME:" + u.getLastName() + ", TASKS:");
 		}
 		
