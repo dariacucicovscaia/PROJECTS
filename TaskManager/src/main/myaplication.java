@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,34 +13,26 @@ import domain.UserRepo;
 public class myaplication {
 	public static void main(String args[]) throws IOException, ClassNotFoundException {
 
-		UserFactory userf = new UserFactory();
-		UserRepo userrepo = new UserRepo("Storage.UserFileStorage");
-		TaskRepo taskrepo = new TaskRepo("Storage.TaskFileStorage");
+		UserRepo userrepo = new UserRepo("domain.UserFileStorage");
+		TaskRepo taskrepo = new TaskRepo("domain.TaskFileStorage");
 
-		try (Scanner scanner = new Scanner(System.in)) {
-			String methodname = scanner.next();
 			String firstName = null, lastName = null, userName = null, taskTitle = null, taskDescription = null;
 
 			/**
 			 * creates a user if console input = -createUser -fn='FirstName' -ln='LastName' -un='UserName'
 			 * 
 			 */
-			if (methodname.equals("-createUser")) {
-				String fn = scanner.next();
+			if (args[0].equals("-createUser")) {
+				String fn = args[1];
 				if (fn.contains("'")) {
-					// get value firstname
 					firstName = ExtractXName(fn);// ----------------------------firstName
-					String ln = scanner.next();
+					String ln = args[2];
 					if (ln.contains("'")) {
-						lastName = ExtractXName(ln);// -------------------------lastName
-						String un = scanner.next();
+						lastName = ExtractXName(ln);    // -------------------------lastName
+						String un = args[3];
 						if (un.contains("'")) {
-							userName = ExtractXName(un);// ----------------------userName
-							// check if user name already exists
-							// add the user
-
-							userrepo.addAndSerializeUser(firstName, lastName, userName); // ------add this to a file or
-						 
+							userName = ExtractXName(un);    // ------------------------------userName
+							userrepo.addAndSerializeUser(firstName, lastName, userName);
 						}
 					}
 				}
@@ -48,29 +41,25 @@ public class myaplication {
 			/**
 			 * shows users if console input = -showAllUsers
 			 */
-			if (methodname.equals("-showAllUsers")) {
-
-				for (String one : userrepo.showAllUsers()) {
-					System.out.println(one);
-				}
-
+			if (args[0].equals("-showAllUsers")) {
+			
+				System.out.println(userrepo.showAllUsers()); 
 			}
 
 			/**
-			 * adds a task to a specific user if console input = -addTask -un='userName'
-			 * -tt='TaskTitle' -td='TaskDescription'
+			 * adds a task to a specific user if console input = -addTask -un='userName' -tt='Task Title' -td='Task Description'
 			 */
 
-			if (methodname.equals("-addTask")) {
-				String un = scanner.next();
+			if (args[0].equals("-addTask")) {
+				String un = args[1];
 				if (un.contains("'")) {
 					// get value firstname
 					userName = ExtractXName(un);// ----------------------------userName
-					String tt = scanner.next();
+					String tt = args[2];
 					if (tt.contains("'")) {
 						taskTitle = ExtractXName(tt);// -------------------------taskTitle
-						String td = scanner.next();
-						if (un.contains("'")) {
+						String td = args[3];
+						if (td.contains("'")) {
 							taskDescription = ExtractXName(td);// ---------------------taskDecription
 							// check if user name already exists
 							// add the user
@@ -85,17 +74,14 @@ public class myaplication {
 			/**
 			 * shows the task of the user if console input = -showTasks -un='userName'
 			 */
-			if (methodname.equals("-showTasks")) {
-				String un = scanner.next();
+			if (args[0].equals("-showTasks")) {
+				String un = args[1];
 				if (un.contains("'")) {
 					// System.out.println(ExtractXName(un));
-					System.out.println();
-					// System.out.println(taskrepo.showTasks(ExtractXName(un)));
+					System.out.println(taskrepo.showTasks(ExtractXName(un)));
 
 				}
 			}
-
-		}
 
 	}
 

@@ -3,7 +3,9 @@ package domain;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class User extends UUIDEntity implements Serializable {
+
+
+ class User extends UUIDEntity implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;

@@ -3,7 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class Task extends UUIDEntity implements Serializable{
+class Task extends UUIDEntity implements Serializable{
 	/**
 	 * 
 	 */
