@@ -3,11 +3,10 @@ package Domain;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class User implements Serializable {
+public class User extends Uuid implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
-	private UUID uuid;
 	private String FirstName;
 	private String LastName;
 	private String userName;
@@ -21,21 +20,15 @@ public class User implements Serializable {
 	 * @param lastName
 	 * @param userName
 	 */
-	public User(String firstName, String lastName, String userName) {
+	public User(UUID uuid, String firstName, String lastName, String userName) {
 		super();
-		setUUID(UUID.randomUUID()); //all our users will have a unique identifier , allows us to set the same username
+		setUuid(uuid); 
 		setFirstName(firstName);
 		setLastName(lastName);
 		setUserName(userName);
 	}
 
-	public UUID getUUID() {
-		return uuid;
-	}
 
-	public void setUUID(UUID uuid) {
-		this.uuid = uuid;
-	}
 
 	public String getFirstName() {
 		return FirstName;

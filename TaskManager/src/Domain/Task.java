@@ -1,13 +1,13 @@
 package Domain;
 
 import java.io.Serializable;
+import java.util.UUID;
 
-public class Task implements Serializable{
+public class Task extends Uuid implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
 	private String userName;
 	private String taskTitle;
 	private String TaskDescription;
@@ -16,19 +16,13 @@ public class Task implements Serializable{
 
 	}
 
-	public Task(String userName, String taskTitle, String taskDescription) {
+	public Task(UUID uuid, String userName, String taskTitle, String taskDescription) {
+		setUuid(uuid);
 		setUserName(userName);
 		setTaskTitle(taskTitle);
 		setTaskDescription(taskDescription);
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getUserName() {
 		return userName;
