@@ -1,6 +1,6 @@
 package Storage;
 
-import domain.User;
+import Domain.User;
 
 public class UserFileStorage extends FileStorage<User>{
 

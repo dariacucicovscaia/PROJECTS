@@ -1,6 +1,6 @@
 package Factory;
 
-import domain.Task;
+import Domain.Task;
 
 public class TaskFactory {
 	

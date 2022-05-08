@@ -2,16 +2,16 @@ package Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Domain.User;
 import Factory.UserFactory;
 import Storage.UserFileStorage;
-import domain.User;
 
 public class UserRepo {
 
 	UserFileStorage userfile;
 
 	public UserRepo(String storege) {
-		
 		try {
 			Class clazz = Class.forName(storege);
 			userfile = (UserFileStorage) clazz.newInstance();
