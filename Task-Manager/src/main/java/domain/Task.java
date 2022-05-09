@@ -3,12 +3,12 @@ package domain;
 import java.util.UUID;
 
 public class Task {
-	private UUID user_id;
-	private String userName;
-	private String taskTitle;
-	private String TaskDescription;
+	public UUID UUID;
+	public String userName;
+	public String taskTitle;
+	public String TaskDescription;
 
-	protected Task() {
+	public Task() {
 		
 	}
 
@@ -20,27 +20,27 @@ public class Task {
 	}
 
 
-	protected String getUserName() {
+	public String getUserName() {
 		return userName;
 	}
 
-	protected void setUserName(String userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-	protected String getTaskTitle() {
+	public String getTaskTitle() {
 		return taskTitle;
 	}
 
-	protected void setTaskTitle(String taskTitle) {
+	public void setTaskTitle(String taskTitle) {
 		this.taskTitle = taskTitle;
 	}
 
-	protected String getTaskDescription() {
+	public String getTaskDescription() {
 		return TaskDescription;
 	}
 
-	protected void setTaskDescription(String taskDescription) {
+	public void setTaskDescription(String taskDescription) {
 		TaskDescription = taskDescription;
 	}
 
@@ -51,11 +51,11 @@ public class Task {
 	}
 
 	public UUID getUser_id() {
-		return user_id;
+		return UUID;
 	}
 
 	public void setUser_id(UUID user_id) {
-		this.user_id = user_id;
+		this.UUID = user_id;
 	}
 
 	

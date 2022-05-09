@@ -17,7 +17,6 @@ public class UserRepo extends DAOAbstract<User>{
 	}
 
 		UserFactory userFactory = new UserFactory();
-		List<User> users = new ArrayList<User>();
 		
 		
 		//TaskRepo t = new TaskRepo("domain.TaskFileStorage");
@@ -25,6 +24,7 @@ public class UserRepo extends DAOAbstract<User>{
 		public void addUser(String firstName, String lastName, String userName) throws SQLException {
 			put(userFactory.createUser(firstName, lastName, userName));
 		}
+		
 
 		// 2 --show all users (prin: FirstName, LastName, number of tasks)
 		public List<String> showAllUsersS() throws SQLException {

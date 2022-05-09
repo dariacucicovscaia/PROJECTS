@@ -14,8 +14,6 @@ public class App {
 		TaskRepo taskrepo = new TaskRepo();
 
 		
-		
-		
 		String firstName = null, lastName = null, userName = null, taskTitle = null, taskDescription = null;
 
 		/**
@@ -30,33 +28,34 @@ public class App {
 			userrepo.addUser(firstName, lastName, userName);
 		}
 
-//		/**
-//		 * shows users if console input = -showAllUsers
-//		 */
-//		if (args[0].equals("-showAllUsers")) {
-//			
-//			userrepo.showAllUsersS().stream().forEach(System.out::println);
-//		}
-//
-//		/**
-//		 * adds a task to a specific user if console input = -addTask -un='UserName' -tt='Task Title' -td='Task Description'
-//		 */
-//
+		/**
+		 * shows users if console input = -showAllUsers
+		 */
+		if (args[0].equals("-showAllUsers")) {
+			
+			userrepo.showAllUsersS().stream().forEach(System.out::println);
+		}
+
+		/**
+		 * adds a task to a specific user if console input = -addTask -un='UserName' -tt='Task Title' -td='Task Description'
+		 */
+
+		taskrepo.addTasks("UserName", "titletask", "description");
 //		if (args[0].equals("-addTask")) {
 //			userName = argread.read(args[1]);
 //			taskTitle = argread.read(args[2]);
 //			taskDescription = argread.read(args[3]);
 //
-//		//	taskrepo.addTasks(userName, taskTitle, taskDescription);
+//			taskrepo.addTasks(userName, taskTitle, taskDescription);
 //
 //		}
-//
-//		/**
-//		 * shows the task of the user if console input = -showTasks -un='userName'
-//		 */
-//		if (args[0].equals("-showTasks")) {
-//		//	System.out.println(taskrepo.showTasks(argread.read(args[1])));
-//		}
+
+		/**
+		 * shows the task of the user if console input = -showTasks -un='userName'
+		 */
+		if (args[0].equals("-showTasks")) {
+			System.out.println(taskrepo.showTasks(argread.read(args[1])));
+		}
 
 	}
 }

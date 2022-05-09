@@ -40,17 +40,19 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 		Field[] fields = entityClazz.getDeclaredFields();
 		String columns = " ";
 		for (Field field : fields) {
-			columns += field.getName() + ",";
+			columns += " \""+field.getName() + "\",";
 		}
 		columns = columns.substring(0, columns.length() - 1);
 		columns += " ";
-		String sql = "SELECT" + columns + " FROM public." + getTableName() + ";";
+		String sql = "SELECT " + columns + " FROM public." + getTableName() + ";";
 		Statement stmt = getConnection().createStatement();
+		
 		ResultSet result = stmt.executeQuery(sql);
 		List<T> entity = new ArrayList<T>();
 		T t = null;
 		while (result.next()) {
 			try {
+				
 				Constructor constr = entityClazz.getConstructor();
 				t = (T) constr.newInstance();
 				for (Field field : fields) {
